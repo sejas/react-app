@@ -1,0 +1,1 @@
+export decks from './decks'

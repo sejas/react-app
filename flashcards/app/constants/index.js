@@ -1,0 +1,1 @@
+export const STORE_STORAGE = 'STORE_STORAGE7'
