@@ -14,6 +14,8 @@ import { persistStore, persistCombineReducers } from 'redux-persist'
 import { PersistGate } from 'redux-persist/es/integration/react'
 import storage from 'redux-persist/es/storage'
 
+import NotificationsService from './app/services/NotificationsService'
+
 
 const configPersist = {
   key: STORE_STORAGE,
@@ -34,6 +36,9 @@ let persistor = persistStore(store)
 
 
 export default class App extends React.Component {
+  componentDidMount(){
+    NotificationsService.setLocalNotification()
+  }
   render() {
     console.log('this.props App',this.props)
     return (

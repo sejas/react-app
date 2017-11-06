@@ -13,6 +13,7 @@ import {
   Button
 } from 'react-native'
 import Question from '../components/Question'
+import NotificationsService from '../services/NotificationsService'
 
 class QuizzScreen extends Component {
   static propTypes = {}
@@ -25,9 +26,19 @@ class QuizzScreen extends Component {
 
   isCorrect = index => () => {
     this.setState({correct:[...this.state.correct, index], current: this.state.current+1})
+    this.checkIfIsFinishedAndCancelNotifications()
   }
   isIncorrect = index => () => {
     this.setState({incorrect:[...this.state.correct, index], current: this.state.current+1})
+    this.checkIfIsFinishedAndCancelNotifications()
+  }
+
+  checkIfIsFinishedAndCancelNotifications = () => {
+    const {questions} = this.props
+    if (this.state.current >= questions.length) {
+      NotificationsService.clearLocalNotification()
+      .then(NotificationsService.setLocalNotification)
+    }
   }
 
   goBack = ()=>{
