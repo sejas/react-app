@@ -3,6 +3,8 @@
  * antonio@sejas.es
  */
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types'
 import {
   View,
@@ -11,7 +13,7 @@ import {
 } from 'react-native'
 
 
-export default class Deck extends Component {
+class Deck extends Component {
   static propTypes = {}
   state = {}
   componentDidMount() {}
@@ -57,3 +59,21 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   }
 });
+
+
+function mapStateToProps({decks}, props) {
+  return {
+    deck: decks[props.deckId]
+  }
+}
+const mapDispatchToProps = dispatch =>
+bindActionCreators(
+  {
+  },
+  dispatch
+)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Deck)

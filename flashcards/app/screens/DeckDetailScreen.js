@@ -24,7 +24,9 @@ export default class DeckDetailScreen extends Component {
     navigation.navigate('AddCardScreen', {deckId})
   }
   startQuiz = () => {
-
+    const {navigation} = this.props
+    const {deckId} = this.props.navigation.state.params
+    navigation.navigate('QuizzScreen', {deckId})
   }
   render() {
     const {deck, deckId} = this.props.navigation.state.params

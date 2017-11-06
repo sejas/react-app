@@ -40,6 +40,7 @@ const ADD_QUESTION_TO_DECK = 'ADD_QUESTION_TO_DECK'
 
 const addQuestionToDeckAction = (deckId, question) => ({
   type: ADD_QUESTION_TO_DECK,
+  deckId,
   question
 })
 export const addQuestionToDeck = (deckId, question) => dispatch => {
@@ -94,7 +95,7 @@ export default function authentication(state = initialState, action) {
         ...state,
         [action.deckId]: {
           ...state[action.deckId],
-          questions: [...state[action.deckId].questions, action.question]
+          questions: [...(state[action.deckId].questions), action.question]
         }
       }
     default:

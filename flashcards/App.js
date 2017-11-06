@@ -93,4 +93,5 @@ const DeckStack = StackNavigator({
   HomeTabs: {screen: HomeTabs},
   DeckDetailScreen: { screen: screens.DeckDetailScreen },
   AddCardScreen: { screen: screens.AddCardScreen },
+  QuizzScreen: { screen: screens.QuizzScreen },
 })

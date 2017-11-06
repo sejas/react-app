@@ -30,7 +30,7 @@ class DeckLists extends Component {
       <ScrollView style={styles.container}>
         {Object.keys(decks).map(deckId => (
           <TouchableOpacity key={deckId} onPress={()=>(this.goToDeck(deckId))}>
-            <Deck deckId={deckId} deck={decks[deckId]} />
+            <Deck deckId={deckId} />
           </TouchableOpacity>
         ))}
       </ScrollView>

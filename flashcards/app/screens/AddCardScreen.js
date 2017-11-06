@@ -16,7 +16,7 @@ import {
   Dimensions,
   Keyboard
 } from 'react-native'
-import {addCard} from '../reducers/decks'
+import {addQuestionToDeck} from '../reducers/decks'
 
 
 
@@ -28,9 +28,10 @@ class AddCardScreen extends Component {
   }
   componentDidMount() {}
   addCard = () => {
-    const {addCard, navigation} = this.props
+    const {addQuestionToDeck, navigation} = this.props
     const {deckId} = this.props.navigation.state.params
-    // addCard(deckId, this.state.question, this.state.answer)
+    const {question, answer} = this.state
+    addQuestionToDeck(deckId, {question, answer})
     Keyboard.dismiss()
     navigation.goBack()
   }
@@ -91,7 +92,7 @@ function mapStateToProps({decks}) {
 const mapDispatchToProps = dispatch =>
 bindActionCreators(
   {
-    addCard,
+    addQuestionToDeck,
   },
   dispatch
 )
