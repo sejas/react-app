@@ -29,11 +29,10 @@ export default class DeckDetailScreen extends Component {
     navigation.navigate('QuizzScreen', {deckId})
   }
   render() {
-    const {deck, deckId} = this.props.navigation.state.params
+    const {deckId} = this.props.navigation.state.params
     return (
       <View style={styles.container}>
         <Deck
-          deck={deck}
           deckId={deckId}
         />
         <Button

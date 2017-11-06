@@ -28,9 +28,10 @@ class AddDeckScreen extends Component {
   componentDidMount() {}
   addDeck = () => {
     const {addDeck, navigation} = this.props
-    addDeck(this.state.title)
+    const deckId = addDeck(this.state.title)
     Keyboard.dismiss()
-    navigation.navigate('DeckListScreen')
+    // navigation.navigate('DeckListScreen')
+    navigation.navigate('DeckDetailScreen', {deckId})
   }
   render() {
     return (

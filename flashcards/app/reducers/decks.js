@@ -31,7 +31,9 @@ const addDeckAction = (key, title) => {
   }
 }
 export const addDeck = title => dispatch => {
-    dispatch(addDeckAction(slugify(title), title))
+    const deckId = slugify(title)
+    dispatch(addDeckAction(deckId, title))
+    return deckId
 }
 
 // MARK: - QUESTIONS

@@ -22,7 +22,7 @@ class DeckLists extends Component {
   goToDeck = (deckId) => {
     const {navigation, decks} = this.props
     const deck = decks[deckId]
-    navigation.navigate('DeckDetailScreen', {deck, deckId})
+    navigation.navigate('DeckDetailScreen', {deckId})
   }
   render() {
     const {decks} = this.props

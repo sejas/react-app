@@ -9,7 +9,8 @@ import PropTypes from 'prop-types'
 import {
   View,
   StyleSheet,
-  Text
+  Text,
+  Button
 } from 'react-native'
 import Question from '../components/Question'
 
@@ -29,6 +30,18 @@ class QuizzScreen extends Component {
     this.setState({incorrect:[...this.state.correct, index], current: this.state.current+1})
   }
 
+  goBack = ()=>{
+    const {navigation} = this.props
+    navigation.goBack()
+  }
+  restart = ()=>{
+    //restart state
+    this.setState(state=>({
+      current : 0,
+      correct: [],
+      incorrect: []
+    }))
+  }
 
 
   render() {
@@ -55,6 +68,15 @@ class QuizzScreen extends Component {
             <Text>
               Result: {Math.round(correct.length* 100/questions.length)}%
             </Text>
+
+            <Button
+              title="Go Back"
+              onPress={this.goBack}
+            />
+            <Button
+              title="Restart Quizz"
+              onPress={this.restart}
+            />
 
           </View>
         }
