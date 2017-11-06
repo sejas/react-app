@@ -10,7 +10,8 @@ import {
   ScrollView,
   View,
   StyleSheet,
-  Text
+  Text,
+  TouchableOpacity,
 } from 'react-native'
 import Deck from './Deck'
 
@@ -18,13 +19,19 @@ class DeckLists extends Component {
   static propTypes = {}
   state = {}
   componentDidMount() {}
-
+  goToDeck = (deckId) => {
+    const {navigation, decks} = this.props
+    const deck = decks[deckId]
+    navigation.navigate('CardsListScreen', {deck, deckId})
+  }
   render() {
     const {decks} = this.props
     return (
       <ScrollView style={styles.container}>
         {Object.keys(decks).map(deckId => (
-          <Deck key={deckId} deckId={deckId} deck={decks[deckId]} />
+          <TouchableOpacity key={deckId} onPress={()=>(this.goToDeck(deckId))}>
+            <Deck deckId={deckId} deck={decks[deckId]} />
+          </TouchableOpacity>
         ))}
       </ScrollView>
     )

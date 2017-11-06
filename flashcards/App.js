@@ -24,7 +24,12 @@ store.subscribe(() => {
     console.log('store.subscribe',JSON.stringify(decks))
     // AsyncStorage.setItem(STORE_STORAGE, JSON.stringify(decks))
     try {
-      AsyncStorage.setItem(STORE_STORAGE, JSON.stringify(decks))
+      AsyncStorage.setItem(STORE_STORAGE, JSON.stringify(decks)).then(s=>{
+        console.log('saved',s)
+        AsyncStorage.getItem(STORE_STORAGE).then(decks=>{
+          console.log('reading if decks were saved',decks)
+        })
+      })
     } catch (error) {
       console.log(error)
       console.warn(error)
@@ -50,7 +55,7 @@ export default class App extends React.Component {
     console.log('this.props App',this.props)
     return (
       <Provider store={store}>
-        <HomeTabs />
+        <DeckStack />
       </Provider>
     );
   }
@@ -62,6 +67,7 @@ const HomeTabs = TabNavigator({
   DeckListScreen: {
     screen: screens.DeckListScreen,
     navigationOptions: {
+      header:null,
       title: 'Decks',
       tabBarLabel: 'Decks',
       tabBarIcon: ({tintColor}) => <SimpleLineIcons name='list' size={30} color={tintColor} />
@@ -70,6 +76,7 @@ const HomeTabs = TabNavigator({
   AddDeckScreen: {
     screen: screens.AddDeckScreen,
     navigationOptions: {
+      header:null,
       title: 'New deck',
       tabBarLabel: 'New deck',
       tabBarIcon: ({tintColor}) => <SimpleLineIcons name='plus' size={30} color={tintColor} />
@@ -78,6 +85,7 @@ const HomeTabs = TabNavigator({
   SettingsScreen: {
     screen: screens.SettingsScreen,
     navigationOptions: {
+      header:null,
       title: 'Settings',
       tabBarLabel: 'Settings',
       tabBarIcon: ({tintColor}) => <SimpleLineIcons name='settings' size={30} color={tintColor} />
@@ -90,4 +98,10 @@ const HomeTabs = TabNavigator({
    tabBarOptions: {
      activeTintColor: '#0773F8',
    },
+})
+
+const DeckStack = StackNavigator({
+  // DeckListScreen: { screen: screens.DeckListScreen, navigationOptions:{header:null}},
+  HomeTabs: {screen: HomeTabs},
+  CardsListScreen: { screen: screens.CardsListScreen },
 })

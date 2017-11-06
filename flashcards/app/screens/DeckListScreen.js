@@ -29,7 +29,7 @@ class DeckListScreen extends Component {
       <View style={styles.container}>
         {decks && Object.keys(decks).length > 0
           ?(
-            <DeckLists />
+            <DeckLists navigation={navigation}/>
            )
           :(<View>
             <Text style={styles.text}>
