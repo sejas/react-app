@@ -12,7 +12,7 @@ import {
   Text,
   Button
 } from 'react-native'
-import {loadDecks} from '../reducers/decks'
+// import {loadDecks} from '../reducers/decks'
 import DeckLists from '../components/DeckLists'
 
 
@@ -20,7 +20,7 @@ class DeckListScreen extends Component {
   static propTypes = {}
   state = {}
   componentWillMount() {
-    this.props.loadDecks()
+    // this.props.loadDecks()
   }
 
   render() {
@@ -69,7 +69,7 @@ function mapStateToProps({decks}) {
 const mapDispatchToProps = dispatch =>
 bindActionCreators(
   {
-    loadDecks,
+    // loadDecks,
   },
   dispatch
 )

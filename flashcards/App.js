@@ -10,53 +10,41 @@ import thunk from 'redux-thunk'
 import * as reducers from './app/reducers'
 import {STORE_STORAGE} from './app/constants'
 
+import { persistStore, persistCombineReducers } from 'redux-persist'
+import { PersistGate } from 'redux-persist/es/integration/react'
+import storage from 'redux-persist/es/storage'
+
+
+const configPersist = {
+  key: STORE_STORAGE,
+  storage,
+}
+const reducersAndPersist = persistCombineReducers(configPersist, reducers)
 const store = createStore(
-  combineReducers(reducers),
+  // combineReducers(reducers),
+  reducersAndPersist,
   composeWithDevTools(
     applyMiddleware(thunk),
   )
   // applyMiddleware(thunk),
 )
+let persistor = persistStore(store)
 
-store.subscribe(() => {
-  const {decks} = store.getState()
-  if (decks && decks != {}) {
-    console.log('store.subscribe',JSON.stringify(decks))
-    // AsyncStorage.setItem(STORE_STORAGE, JSON.stringify(decks))
-    try {
-      AsyncStorage.setItem(STORE_STORAGE, JSON.stringify(decks)).then(s=>{
-        console.log('saved',s)
-        AsyncStorage.getItem(STORE_STORAGE).then(decks=>{
-          console.log('reading if decks were saved',decks)
-        })
-      })
-    } catch (error) {
-      console.log(error)
-      console.warn(error)
-    }
 
-    // try {
-    //   const value = await AsyncStorage.getItem(STORE_STORAGE);
-    //   if (value !== null){
-    //     // We have data!!
-    //     console.log(value);
-    //   }
-    // } catch (error) {
-    //   console.log(error)
-    //   console.warn(error)
-    // }
-
-  }
-})
 
 
 export default class App extends React.Component {
   render() {
     console.log('this.props App',this.props)
     return (
-      <Provider store={store}>
-        <DeckStack />
-      </Provider>
+        <Provider store={store}>
+          <PersistGate
+              // loading={<Loading />}
+              // onBeforeLift={onBeforeLift}
+              persistor={persistor}>
+              <DeckStack />
+           </PersistGate>
+        </Provider>
     );
   }
 }
@@ -103,5 +91,6 @@ const HomeTabs = TabNavigator({
 const DeckStack = StackNavigator({
   // DeckListScreen: { screen: screens.DeckListScreen, navigationOptions:{header:null}},
   HomeTabs: {screen: HomeTabs},
-  CardsListScreen: { screen: screens.CardsListScreen },
+  DeckDetailScreen: { screen: screens.DeckDetailScreen },
+  AddCardScreen: { screen: screens.AddCardScreen },
 })

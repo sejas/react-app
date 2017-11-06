@@ -5,23 +5,23 @@ import {STORE_STORAGE} from '../constants'
 // MARK: - DECKS
 // Action Constants
 const ADD_DECK = 'ADD_DECK'
-const LOADING_DECKS_LOCAL = 'LOADING_DECKS_LOCAL'
-const LOAD_DECKS_LOCAL = 'LOAD_DECKS_LOCAL'
+// const LOADING_DECKS_LOCAL = 'LOADING_DECKS_LOCAL'
+// const LOAD_DECKS_LOCAL = 'LOAD_DECKS_LOCAL'
 
-const loadingDecksAction = () => ({
-  type: LOADING_DECKS_LOCAL,
-})
-const loadDecksAction = decks => ({
-  type: LOAD_DECKS_LOCAL,
-  decks
-})
-export const loadDecks = () => dispatch => {
-  dispatch(loadingDecksAction())
-  AsyncStorage.getItem(STORE_STORAGE).then(decks => {
-    console.log('loadDecks reading decks',JSON.parse(decks))
-    dispatch(loadDecksAction(JSON.parse(decks)))
-  })
-}
+// const loadingDecksAction = () => ({
+//   type: LOADING_DECKS_LOCAL,
+// })
+// const loadDecksAction = decks => ({
+//   type: LOAD_DECKS_LOCAL,
+//   decks
+// })
+// export const loadDecks = () => dispatch => {
+//   dispatch(loadingDecksAction())
+//   AsyncStorage.getItem(STORE_STORAGE).then(decks => {
+//     console.log('loadDecks reading decks',JSON.parse(decks))
+//     dispatch(loadDecksAction(JSON.parse(decks)))
+//   })
+// }
 
 const addDeckAction = (key, title) => {
   return {
@@ -79,8 +79,8 @@ const initialState = {
 
 export default function authentication(state = initialState, action) {
   switch (action.type) {
-    case LOAD_DECKS_LOCAL:
-      return action.decks || {}
+    // case LOAD_DECKS_LOCAL:
+    //   return action.decks || {}
     case ADD_DECK:
       return {
         ...state,
