@@ -19,7 +19,7 @@ const createNotification = () => {
   }
 
 const notification_hours = 20
-const notification_minutes = 00
+const notification_minutes = 0
 
 const NotificationsService = {
   clearLocalNotification: () => {
