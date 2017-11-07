@@ -7,7 +7,9 @@ import PropTypes from 'prop-types'
 import {
   View,
   StyleSheet,
-  Text
+  Text,
+  Button,
+  Linking
 } from 'react-native'
 
 
@@ -19,9 +21,13 @@ export default class SettingsScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>
-          SettingsScreen
+        <Text style={styles.text}>
+          Created by
         </Text>
+        <Button style={styles.text}
+          title="Antonio Sejas"
+          onPress={ ()=>{ Linking.openURL('https://sejas.es')}}
+        />
       </View>
     )
   }
@@ -30,5 +36,11 @@ export default class SettingsScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
+  text: {
+    fontSize: 20,
+    textAlign: 'center'
+  }
 });
